@@ -1,0 +1,24 @@
+# Refreshes public/profile.json every 6 hours for games that need your own API key.
+# Made by everythingyouneed.dev (Game Profile). Delete this file to stop it.
+name: Refresh Game Profile
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: refresh
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Refresh public/profile.json
+        env:
+          GAME_PROFILE: ${{ secrets.GAME_PROFILE_REFRESH }}
+          GITHUB_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          curl -fsSL --retry 3 https://everythingyouneed.dev/tools/game/refresh.mjs -o "$RUNNER_TEMP/refresh.mjs"
+          node "$RUNNER_TEMP/refresh.mjs"

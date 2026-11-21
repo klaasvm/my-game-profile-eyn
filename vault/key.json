@@ -1,0 +1,7 @@
+{
+  "format": "game-profile-vault/1",
+  "kdf": "PBKDF2-SHA256",
+  "rounds": 600000,
+  "salt": "MeyFIEaD/u/irtrWTa3ahw==",
+  "check": "yo2Visy0plhenIZM4bsW4ET56igigbdt4rg+kB/Iyt6Ivz8gA8goPUgE/b8="
+}
